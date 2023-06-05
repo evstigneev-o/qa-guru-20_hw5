@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.DragAndDropOptions.to;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -27,6 +28,14 @@ public class DragAndDropTest {
         Configuration.browserSize = "1920x1080";
         //Configuration.holdBrowserOpen = true;
         //Configuration.headless = true;
+    }
+
+    @Test
+    public void rectangleShouldBeMovedByDragAndDrop() {
+        open("https://the-internet.herokuapp.com/drag_and_drop");
+        columnA.dragAndDrop(to(columnB));
+        columnA.shouldHave(text("B"));
+        columnB.shouldHave(text("A"));
     }
 
     @Test
